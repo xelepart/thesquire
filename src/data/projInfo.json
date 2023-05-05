@@ -1,15 +1,15 @@
 {
 	"$schema": "./projInfo-schema.json",
 
-	"title": "Profectus",
-	"description": "A project made in Profectus",
+	"title": "The Squire",
+	"description": "A story-driven incremental game with idle components.",
 	"id": "",
-	"author": "",
+	"author": "xelepart",
 	"discordName": "",
 	"discordLink": "",
 
-	"versionNumber": "0.0",
-	"versionTitle": "Initial Commit",
+	"versionNumber": "0.1",
+	"versionTitle": "Pre-Alpha",
 
 	"allowGoBack": true,
 	"defaultShowSmall": false,
@@ -17,7 +17,7 @@
 	"useHeader": true,
 	"banner": null,
 	"logo": "",
-	"initialTabs": [ "main" ],
+	"initialTabs": [ "farmer" ],
 
 	"maxTickLength": 3600,
 	"offlineLimit": 1,
