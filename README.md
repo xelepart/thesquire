@@ -1,6 +1,6 @@
-# Profectus
+# The Squiare, (using Profectus)
 
-A game engine that grows with you
+A story-driven incremental game with idle aspects. 
 
 [![Run on Repl.it](https://repl.it/badge/github/profectus-engine/Profectus)](https://repl.it/github/profectus-engine/Profectus)
 
