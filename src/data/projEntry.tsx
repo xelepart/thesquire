@@ -17,7 +17,7 @@ import prestige from "./layers/prestige";
 /**
  * @hidden
  */
-export const main = createLayer("main", function (this: BaseLayer) {
+export const farmer = createLayer("farmer", function (this: BaseLayer) {
     const points = createResource<DecimalSource>(10);
     const best = trackBest(points);
     const total = trackTotal(points);
@@ -80,7 +80,7 @@ export const main = createLayer("main", function (this: BaseLayer) {
 export const getInitialLayers = (
     /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     player: Partial<Player>
-): Array<GenericLayer> => [main, prestige];
+): Array<GenericLayer> => [farmer, prestige];
 
 /**
  * A computed ref whose value is true whenever the game is over.
