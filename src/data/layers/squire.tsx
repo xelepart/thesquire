@@ -2,7 +2,7 @@
  * @module
  * @hidden
  */
-import { farmer } from "data/projEntry";
+import { farmer } from "./layers/farmer";
 import { createCumulativeConversion } from "features/conversion";
 import { jsx } from "features/feature";
 import { createHotkey } from "features/hotkey";
@@ -16,7 +16,7 @@ import type { DecimalSource } from "util/bignum";
 import { render } from "util/vue";
 import { createLayerTreeNode, createResetButton } from "../common";
 
-const id = "p";
+const id = "squire";
 const layer = createLayer(id, function (this: BaseLayer) {
     const name = "Prestige";
     const color = "#4BDC13";
