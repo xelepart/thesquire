@@ -2,7 +2,7 @@
  * @module
  * @hidden
  */
-import { main } from "data/projEntry";
+import { farmer } from "data/projEntry";
 import { createCumulativeConversion } from "features/conversion";
 import { jsx } from "features/feature";
 import { createHotkey } from "features/hotkey";
@@ -24,7 +24,7 @@ const layer = createLayer(id, function (this: BaseLayer) {
 
     const conversion = createCumulativeConversion(() => ({
         formula: x => x.div(10).sqrt(),
-        baseResource: main.points,
+        baseResource: farmer.points,
         gainResource: points
     }));
 
@@ -44,7 +44,7 @@ const layer = createLayer(id, function (this: BaseLayer) {
 
     const resetButton = createResetButton(() => ({
         conversion,
-        tree: main.tree,
+        tree: farmer.tree,
         treeNode
     }));
 
