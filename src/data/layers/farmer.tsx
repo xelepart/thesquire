@@ -16,8 +16,7 @@ import type { DecimalSource } from "util/bignum";
 import Decimal, { format, formatTime } from "util/bignum";
 import { render } from "util/vue";
 import { computed, toRaw } from "vue";
-import farmer from "./layers/farmer";
-import squire from "./layers/squire";
+import squire from "squire";
 
 const id = "farmer";
 const layer = createLayer(id, function (this: BaseLayer) {

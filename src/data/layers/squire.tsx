@@ -2,7 +2,7 @@
  * @module
  * @hidden
  */
-import { farmer } from "./layers/farmer";
+import { farmer } from "farmer";
 import { createCumulativeConversion } from "features/conversion";
 import { jsx } from "features/feature";
 import { createHotkey } from "features/hotkey";
