@@ -11,16 +11,16 @@
 	"versionNumber": "0.1",
 	"versionTitle": "Pre-Alpha",
 
-	"allowGoBack": true,
+	"allowGoBack": false,
 	"defaultShowSmall": false,
-	"defaultDecimalsShown": 2,
+	"defaultDecimalsShown": 1,
 	"useHeader": true,
 	"banner": null,
 	"logo": "",
 	"initialTabs": [ "farmer" ],
 
-	"maxTickLength": 3600,
-	"offlineLimit": 1,
-	"enablePausing": true,
+	"maxTickLength": 5,
+	"offlineLimit": 26,
+	"enablePausing": false,
 	"exportEncoding": "base64"
 }

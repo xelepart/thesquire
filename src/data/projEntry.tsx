@@ -22,7 +22,9 @@ import squire from "./layers/squire";
 export const getInitialLayers = (
     /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     player: Partial<Player>
-): Array<GenericLayer> => [farmer, squire];
+): Array<GenericLayer> => {
+  return [farmer, squire];
+}
 
 /**
  * A computed ref whose value is true whenever the game is over.
