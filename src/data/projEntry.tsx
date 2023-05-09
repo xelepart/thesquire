@@ -15,8 +15,6 @@ import { computed, toRaw } from "vue";
 import farmer from "./layers/farmer";
 import squire from "./layers/squire";
 
-export farmer;
-
 /**
  * Given a player save data object being loaded, return a list of layers that should currently be enabled.
  * If your project does not use dynamic layers, this should just return all layers.
