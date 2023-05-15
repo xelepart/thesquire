@@ -18,14 +18,14 @@ import { createLayerTreeNode, createResetButton } from "../common";
 
 const id = "squire";
 const layer = createLayer(id, function (this: BaseLayer) {
-    const name = "Prestige";
-    const color = "#4BDC13";
-    const points = createResource<DecimalSource>(0, "prestige points");
+    const name = "The Squire";
+    const color = "#32527B";
+    const honor = createResource<DecimalSource>(0, "honor");
 
     const conversion = createCumulativeConversion(() => ({
         formula: x => x.div(10).sqrt(),
         baseResource: farmer.points,
-        gainResource: points
+        gainResource: honor
     }));
 
     const reset = createReset(() => ({
@@ -33,39 +33,33 @@ const layer = createLayer(id, function (this: BaseLayer) {
     }));
 
     const treeNode = createLayerTreeNode(() => ({
-        layerID: id,
+        layerID: "s",
         color,
         reset
     }));
+
     addTooltip(treeNode, {
-        display: createResourceTooltip(points),
+        display: createResourceTooltip(honor),
         pinnable: true
     });
 
-    const resetButton = createResetButton(() => ({
-        conversion,
-        tree: farmer.tree,
-        treeNode
-    }));
-
-    const hotkey = createHotkey(() => ({
-        description: "Reset for prestige points",
-        key: "p",
-        onPress: resetButton.onClick
-    }));
+    // const resetButton = createResetButton(() => ({
+    //     conversion,
+    //     tree: farmer.tree,
+    //     treeNode
+    // }));
 
     return {
         name,
         color,
-        points,
+        honor,
         display: jsx(() => (
             <>
-                <MainDisplay resource={points} color={color} />
-                {render(resetButton)}
+                <MainDisplay resource={honor} color={color} />
+                {/* {render(resetButton)} */}
             </>
         )),
-        treeNode,
-        hotkey
+        treeNode
     };
 });
 

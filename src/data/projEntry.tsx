@@ -12,6 +12,7 @@ import type { DecimalSource } from "util/bignum";
 import Decimal, { format, formatTime } from "util/bignum";
 import { render } from "util/vue";
 import { computed, toRaw } from "vue";
+import you from "./layers/you";
 import farmer from "./layers/farmer";
 import squire from "./layers/squire";
 
@@ -23,7 +24,7 @@ export const getInitialLayers = (
     /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     player: Partial<Player>
 ): Array<GenericLayer> => {
-  return [farmer, squire];
+  return [you, farmer, squire];
 }
 
 /**

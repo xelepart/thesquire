@@ -17,12 +17,12 @@ import Decimal, { format, formatTime } from "util/bignum";
 import { render } from "util/vue";
 import { computed, toRaw } from "vue";
 import squire from "./squire";
+import farmer from "./farmer";
 
-const id = "farmer";
+const id = "you";
 const layer = createLayer(id, function (this: BaseLayer) {
-    const points = createResource<DecimalSource>(10);
-    const best = trackBest(points);
-    const total = trackTotal(points);
+    const gold = createResource<DecimalSource>(0, "g", 0, false);
+    const age = createResource<DecimalSource>(14, "yr", 1, false);
 
     const pointGain = computed(() => {
         // eslint-disable-next-line prefer-const
@@ -30,17 +30,14 @@ const layer = createLayer(id, function (this: BaseLayer) {
         return gain;
     });
     globalBus.on("update", diff => {
-        points.value = Decimal.add(points.value, Decimal.times(pointGain.value, diff));
+        // if we are doing a task, do it. if it completes, do the completion of it.
     });
-    const oomps = trackOOMPS(points, pointGain);
 
     const tree = createTree(() => ({
-        nodes: [[squire.treeNode]],
+        nodes: [[farmer.treeNode, squire.treeNode]],
         branches: [],
         onReset() {
-            points.value = toRaw(this.resettingNode.value) === toRaw(squire.treeNode) ? 0 : 10;
-            best.value = points.value;
-            total.value = points.value;
+            age.value = 18;
         },
         resetPropagation: branchedResetPropagation
     })) as GenericTree;
@@ -58,19 +55,16 @@ const layer = createLayer(id, function (this: BaseLayer) {
                     <div>Offline Time: {formatTime(player.offlineTime)}</div>
                 ) : null}
                 <div>
-                    {Decimal.lt(points.value, "1e1000") ? <span>You have </span> : null}
-                    <h2>{format(points.value)}</h2>
-                    {Decimal.lt(points.value, "1e1e6") ? <span> points</span> : null}
+                    {Decimal.lt(gold.value, "1e1000") ? <span>You have </span> : null}
+                    <h2>{format(gold.value)}</h2>
+                    {Decimal.lt(gold.value, "1e1e6") ? <span> gold</span> : null}
                 </div>
-                {Decimal.gt(pointGain.value, 0) ? <div>({oomps.value})</div> : null}
                 <Spacer />
                 {render(tree)}
             </>
         )),
-        points,
-        best,
-        total,
-        oomps,
+        age,
+        gold,
         tree
     };
 });

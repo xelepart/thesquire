@@ -10,6 +10,7 @@ import { branchedResetPropagation, createTree } from "features/trees/tree";
 import { globalBus } from "game/events";
 import type { BaseLayer, GenericLayer } from "game/layers";
 import { createLayer } from "game/layers";
+import { createReset } from "features/reset";
 import type { Player } from "game/player";
 import player from "game/player";
 import type { DecimalSource } from "util/bignum";
@@ -17,9 +18,14 @@ import Decimal, { format, formatTime } from "util/bignum";
 import { render } from "util/vue";
 import { computed, toRaw } from "vue";
 import squire from "./squire";
+import { createLayerTreeNode, createResetButton } from "../common";
+
 
 const id = "farmer";
 const layer = createLayer(id, function (this: BaseLayer) {
+    const name = "The Farmer";
+    const color = "#F5DEB3";
+
     const points = createResource<DecimalSource>(10);
     const best = trackBest(points);
     const total = trackTotal(points);
@@ -32,22 +38,19 @@ const layer = createLayer(id, function (this: BaseLayer) {
     globalBus.on("update", diff => {
         points.value = Decimal.add(points.value, Decimal.times(pointGain.value, diff));
     });
-    const oomps = trackOOMPS(points, pointGain);
 
-    const tree = createTree(() => ({
-        nodes: [[squire.treeNode]],
-        branches: [],
-        onReset() {
-            points.value = toRaw(this.resettingNode.value) === toRaw(squire.treeNode) ? 0 : 10;
-            best.value = points.value;
-            total.value = points.value;
-        },
-        resetPropagation: branchedResetPropagation
-    })) as GenericTree;
+    const reset = createReset(() => ({
+        thingsToReset: (): Record<string, unknown>[] => [layer]
+    }));
+
+    const treeNode = createLayerTreeNode(() => ({
+        layerID: "f",
+        color,
+        reset
+    }));
 
     return {
-        name: "Tree",
-        links: tree.links,
+        name: "FarmerTree",
         display: jsx(() => (
             <>
                 {player.devSpeed === 0 ? <div>Game Paused</div> : null}
@@ -62,16 +65,12 @@ const layer = createLayer(id, function (this: BaseLayer) {
                     <h2>{format(points.value)}</h2>
                     {Decimal.lt(points.value, "1e1e6") ? <span> points</span> : null}
                 </div>
-                {Decimal.gt(pointGain.value, 0) ? <div>({oomps.value})</div> : null}
-                <Spacer />
-                {render(tree)}
             </>
         )),
         points,
         best,
         total,
-        oomps,
-        tree
+        treeNode
     };
 });
 
